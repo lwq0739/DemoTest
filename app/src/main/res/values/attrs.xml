@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RatioImageView">
+        <attr name="aspectRatio" format="float"/>
+        <attr name="fixed">
+            <enum name="WIDE" value="1"/>
+            <enum name="HIGH" value="2"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="RatingBar">
+        <attr name="numStars" format="integer"/>
+        <attr name="rating" format="float"/>
+        <attr name="itemWidth" format="dimension"/>
+        <attr name="itemHeight" format="dimension"/>
+        <attr name="stepSize" format="float"/>
+        <attr name="interval" format="dimension"/>
+        <attr name="background" format="reference"/>
+        <attr name="progress" format="reference"/>
+
+    </declare-styleable>
+</resources>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+    <style>
+        .icon {
+            border-radius: 5px;
+            width: 65%;
+            height: auto;
+        }
+
+        .icon_container {
+            width: 20%;
+
+        }
+
+        body {
+            margin: 0;
+            background-color: #f0f0f0;
+            text-align: center;
+        }
+
+        .clear {
+            clear: both;
+        }
+
+        p {
+            color: #747474;
+            text-align: center;
+            font-size: medium;
+        }
+
+        p.icon_text {
+            font-size: small;
+            color: #747474;
+            text-align: center;
+        }
+
+        p.class_text {
+            font-size: medium;
+            color: #2A3D4C;
+            text-align: center;
+        }
+
+        .circle {
+            width: 60px;
+            height: 60px;
+            background-color: #3cd0cf;
+            border-radius: 50%;
+        }
+
+        .bannerIndicatorContainer {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 5px;
+            margin: auto;
+            height: min-content;
+            width: 35px;
+        }
+
+        .bannerCircle {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background-color: white;
+            margin-left: 5px;
+            float: left;
+            display: block;
+
+        }
+
+
+    </style>
+    <meta charset="UTF-8">
+    <title>home</title>
+    <script>
+        const bannerList = ["https://vanthink-dev.oss-cn-qingdao.aliyuncs.com/f4c29fdd4daac44882da67288d4e5af0.png",
+            "https://vanthink-dev.oss-cn-qingdao.aliyuncs.com/b6515e200ec887b8bb5bf5532feda5aa.png",
+            "https://vanthink-dev.oss-cn-qingdao.aliyuncs.com/b07eacc6602f487615f51782c4376ff4.png"];
+        const urlList = ["http://v3.rabbitpre.com/m2/aUe1ZjuGiB",
+            "http://v3.rabbitpre.com/m2/aUe1ZjuZns",
+            "http://v3.rabbitpre.com/m2/aUe1ZjuZns"];
+        var nextPosition = 0;
+
+        function init() {
+            setInterval("changeImg()",5000);
+        }
+
+        function changeImg() {
+            var indicatorContainer = document.getElementById('indicatorContainer');
+            var indicatorList = indicatorContainer.getElementsByTagName('p');
+            var banner = document.getElementById("banner");
+            for (var i = 0; i < bannerList.length; i++) {
+                if (banner.src === bannerList[i]) {
+                    nextPosition++;
+                }
+                indicatorList[i].style.backgroundColor = "#ffffff";
+            }
+            if (nextPosition >= bannerList.length) {
+                nextPosition = 0;
+            }
+            indicatorList[nextPosition].style.backgroundColor = "#3cd0cf";
+            banner.src = bannerList[nextPosition];
+
+        }
+
+        function showToast(text) {
+            window.js.showToast(text);
+        }
+
+        function showWebActivity(url) {
+            window.js.showWebActivity("file:///android_asset/"+url);
+        }
+
+        function showWeb() {
+            showWebActivity(urlList[nextPosition]);
+        }
+
+        function showDevicePixelRatio() {
+            showToast("当前设备像素比: "+window.devicePixelRatio+"  "+window.width+" "+window.height);
+        }
+    </script>
+</head>
+<body>
+<!--https://vanthink-dev.oss-cn-qingdao.aliyuncs.com/b6515e200ec887b8bb5bf5532feda5aa.png-->
+<!--https://vanthink-dev.oss-cn-qingdao.aliyuncs.com/b07eacc6602f487615f51782c4376ff4.png-->
+<div style="margin: 0 auto;position: relative;">
+    <img id="banner" onclick="showWeb()"  src="https://vanthink-dev.oss-cn-qingdao.aliyuncs.com/f4c29fdd4daac44882da67288d4e5af0.png"
+         style="width:100%;height: auto;">
+    <div id="indicatorContainer" class="bannerIndicatorContainer">
+        <p class="bannerCircle" style="background-color: #3cd0cf"></p>
+        <p class="bannerCircle"></p>
+        <p class="bannerCircle"></p>
+    </div>
+
+</div>
+<div style="padding: 10px 0 0;text-align:center;background-color: white">
+    <div onclick="showWebActivity('web/oral.html')" style="float: left" class="icon_container">
+        <img src="https://img1.wxzxzj.com\/88cc96a0115613df8e61852f36e78b03.png" class="icon">
+        <p class="icon_text">口语</p>
+
+    </div>
+    <div onclick="showWebActivity('web/testbank.html')" style="float: left" class="icon_container">
+        <img src="https://img1.wxzxzj.com/64c6add66c8e65cb8db95052114b0c0d.png" class="icon">
+        <p class="icon_text">习题</p>
+    </div>
+    <div onclick="showToast('卷子')" style="float: left" class="icon_container">
+        <img src="https://img1.wxzxzj.com\/9f0de61353501533b88c6840c51a94e0.png" class="icon">
+        <p class="icon_text">卷子</p>
+    </div>
+    <div onclick="showToast('单词本')" style="float: left" class="icon_container">
+        <img src="https://img1.wxzxzj.com\/5871836cee6ed259a92bbcae55cb2165.png" class="icon">
+        <p class="icon_text">单词本</p>
+    </div>
+    <div onclick="showToast('每日一听')" style="float: left" class="icon_container">
+        <img src="https://img1.wxzxzj.com\/23324771cb36d1c14a1262686147bcb4.png" class="icon">
+        <p class="icon_text">每日一听</p>
+    </div>
+    <div class="clear"></div>
+</div>
+<div style="padding: 1px 10px;background-color: #f0f0f0;text-align: center">
+    <p onclick="showToast('班级列表')" style="width: 50%;float: left;text-align: left;">班级列表</p>
+    <p onclick="showToast('+ 班级')" style="width: 25%;float: left;text-align: right;color: #3cd0cf;">+ 班级</p>
+    <p onclick="showToast('排序')" style="width: 25%;float: left;text-align: right;color: #3cd0cf;">排序</p>
+    <p class="clear"></p>
+</div>
+<div style="padding: 1px 10px;background-color:white;">
+    <div>
+        <p style="float: left" class="class_text">[班号:9115]lwq</p>
+        <p style="float: right" class="class_text">4 ></p>
+        <p class="clear"></p>
+    </div>
+    <div>
+        <p style="float: left" class="class_text">[班号:9347]LII</p>
+        <p style="float: right" class="class_text">0 ></p>
+        <p class="clear"></p>
+    </div>
+    <div>
+        <p style="float: left" class="class_text">[班号:9179]ceshis</p>
+        <p style="float: right" class="class_text">0 ></p>
+        <p class="clear"></p>
+    </div>
+</div>
+<div onclick="showDevicePixelRatio()" class="circle" style="text-align: center;position: fixed;right: 15px;bottom: 15px;display: table;">
+    <div style="vertical-align: middle;display: table-cell;color: white;font-size: smaller">
+        布置<br>作业
+    </div>
+</div>
+<div style="height: 50px;width: 100%"></div>
+<script>
+    init();
+</script>
+</body>
+</html>

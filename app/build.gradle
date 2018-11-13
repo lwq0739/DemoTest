@@ -1,0 +1,122 @@
+apply plugin: 'com.android.application'
+
+android {
+    signingConfigs {
+        release {
+            keyAlias 'key0'
+            keyPassword '123456'
+            storeFile file('C:/Users/lwq/Desktop/download/DemoTest/app/demoTest.jks')
+            storePassword '123456'
+        }
+    }
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "com.example.lwq.demotest"
+        minSdkVersion 16
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        flavorDimensions "lwq"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        resValue "string", "app_name", '"哦哦哦"'
+    }
+    sourceSets{
+        main{
+            res.srcDirs = ['src/main/res/layouts/main','src/main/res']
+//            res.srcDirs 'src/main/res'
+        }
+        google{
+            java.srcDirs = ['src/google/java']
+        }
+        baidu{
+            java.srcDirs = ['src/baidu/java']
+        }
+        sougou{
+            java.srcDirs = ['src/sougou/java']
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "type", '"release"'
+            signingConfig signingConfigs.release
+        }
+
+        debug {
+            ext.enableCrashlytics = false
+            buildConfigField "String", "type", '"debug"'
+        }
+
+
+    }
+    productFlavors{
+        google{
+            resValue "string", "app_name", '"卡卡卡"'
+            buildConfigField "String", "Api", '"www.google.com"'
+//            name "卡卡卡"
+        }
+
+        baidu{
+            buildConfigField "String", "Api", '"www.baidu.com"'
+//            name "哦哦哦"
+        }
+
+        sougou{
+            minSdkVersion 22
+            resValue "string", "app_name", '"啦啦啦"'
+            buildConfigField "String", "Api", '"www.sougou.com"'
+//            name "啦啦啦"
+        }
+    }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "demo_test_${variant.flavorName}_${buildType.name}_v${variant.versionName}_${getTime()}.apk"
+        }
+    }
+    publishNonDefault true
+    defaultPublishConfig "googleDebug"
+
+    dexOptions {
+        // Sets the maximum number of DEX processes
+        // that can be started concurrently.
+        maxProcessCount 8
+        // Sets the maximum memory allocation pool size
+        // for the dex operation.
+        javaMaxHeapSize "2g"
+        // Enables Gradle to pre-dex library dependencies.
+        preDexLibraries true
+    }
+
+}
+
+task task1<<{
+    println 'task1'
+}
+
+task task2<<{
+    println 'task2'
+}
+
+def getTime() {
+    String today = new Date().format('YY年MM月dd日HH时mm分')
+    return today
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'com.github.bumptech.glide:glide:4.3.1'
+    implementation 'org.ccil.cowan.tagsoup:tagsoup:1.2.1'
+    implementation 'com.google.code.gson:gson:2.8.4'
+//    implementation('com.afollestad.material-dialogs:core:0.9.3.0', {
+//        exclude group: 'com.android.support'
+//    })
+    implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation files('libs/js.jar')
+}

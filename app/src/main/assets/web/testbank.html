@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+    <meta charset="UTF-8">
+    <title>习题</title>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="testbank.js"></script>
+    <script>
+        function loadXMLDoc(url) {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+                    alert(xmlhttp.responseText);
+                    document.getElementById("text").innerHTML = xmlhttp.responseText;
+                }
+            };
+            xmlhttp.open("GET", url, true);
+            xmlhttp.send();
+        }
+
+        $(document).ready(function () {
+            $("#text").click(function () {
+                // $(this).hide();
+                console.log("单击" + $(this));
+
+            });
+
+            $("#text").dblclick(function () {
+                // $(this).hide();
+                console.log("双击" + $(this));
+            });
+            $("#text").hover(function () {
+                console.log("进入");
+            }, function () {
+                console.log("离开");
+            });
+
+            $("#text").click(function () {
+                $(this).animate({
+                    left: '200px',
+                    opacity: '0.5',
+                    fontSize: '30px'
+
+                })
+            });
+            var symbol = "+";
+            var opacitySymbol = "-";
+            $("#div").click(function () {
+
+                var div = document.getElementById("div");
+                console.log("lwqlwqlwq:  " + div.style.opacity);
+                if (div.style.opacity <= 0.1) {
+                    opacitySymbol = "+";
+                    symbol = "-";
+                } else if (div.style.opacity >= 1) {
+                    opacitySymbol = "-";
+                    symbol = "+";
+                }
+                $(this).animate({
+                    left: symbol + '=20px',
+                    top: symbol + '=20px',
+                    height: symbol + '=20px',
+                    width: symbol + '=20px',
+                    opacity: opacitySymbol + '=0.1',
+                });
+
+            });
+            $("#div2").click(function () {
+                var div = $(this);
+                div.animate({height: '200px', opacity: '0.4'}, "slow");
+                div.animate({width: '200px', opacity: '0.8'}, "slow");
+                div.animate({height: '100px', opacity: '0.4'}, "slow");
+                div.animate({width: '100px', opacity: '0.8'}, "slow");
+            });
+            $("#testP").click(function () {
+                $(this).append("哦老啊咯阿老啊咯")
+            });
+
+            $(".percentage").click(function () {
+                var index = $(".percentage").index($(this));
+                showAlert(getAnswer(index));
+            });
+
+        });
+
+        function showAlert(text) {
+            if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+                window.js.showDialog("",text);
+            } else {
+                alert(text);
+            }
+        }
+
+
+        function getAllText(tag) {
+            $(tag).text(function (i, originText) {
+                console.log(i + "  " + originText)
+            })
+        }
+
+        var Time = function () {
+            var time = 0;
+            return function () {
+                time += 1;
+                console.log("lwqlwq  " + time);
+                return time;
+            }
+        }();
+
+    </script>
+    <style>
+        .underline {
+            border-bottom: 1px #3cd0cf solid;
+            padding-bottom: 1px;
+            padding-left: 2px;
+            padding-right: 2px;
+            color: #3cd0cf;
+        }
+
+        .no {
+            border-bottom: 1px #3cd0cf solid;
+            padding-bottom: 1px;
+            color: #3cd0cf;
+            padding-left: 2px;
+        }
+        .percentage {
+            border: 1px #3cd0cf solid;
+            padding-left: 5px;
+            padding-right: 15px;
+            margin-left: 1px;
+            color: #3cd0cf;
+            background-size: 16px auto;
+            background-image: url("img/opposite.png");
+            background-repeat: no-repeat;
+            background-position: right;
+
+        }
+        .opposite{
+            width: 0;
+            height: 0;
+            border-width: 10px;
+            border-style: solid;
+            border-color: #3cd0cf transparent transparent transparent;
+        }
+
+
+        /*句子*/
+
+
+        .itemSentenceContainer {
+            margin-left: 10px;
+            margin-right: 10px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .sentenceContainer {
+            margin-bottom: 5px;
+            color: #333333;
+        }
+
+        .explainContainer {
+
+        }
+        .leftDiv{
+            display:inline;
+            width: 25px;
+            height: 25px;
+            float: left;
+            background-image: url("img/horn_green_3.png");
+            background-size: 25px 25px;
+            background-repeat: no-repeat;
+            background-position: top;
+
+        }
+        .rightDiv{
+            margin-left: 30px;
+            width:auto;
+        }
+
+        /*单词*/
+
+        .itemWordContainer {
+            margin-left: 10px;
+            margin-right: 10px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .wordContainer {
+            padding-top: 0px;
+            margin-bottom: 5px;
+            color: #333333;
+        }
+
+        .word {
+            background-image: url("img/horn_green_3.png");
+            background-size: 25px 25px;
+            background-repeat: no-repeat;
+            background-position: right;
+            padding-right: 30px;
+        }
+
+        .wordExplainContainer {
+
+        }
+
+
+        .wordExplain {
+
+        }
+        .wordLeftDiv{
+            display:inline;
+            width: 25px;
+            height: 25px;
+            float: left;
+
+        }
+        .wordRightDiv{
+            margin-left: 30px;
+            width:auto;
+        }
+
+
+        div {
+            color: #666666;
+            font-size: large;
+        }
+
+
+
+    </style>
+</head>
+<body>
+<div id="text">asdasd</div>
+<!--<script> loadXMLDoc('test.txt')</script>-->
+<p>Reinhardt, <span style="color: #3cd0cf">you</span> <span style="color: #3cd0cf">know</span> <span
+        style="color: #3cd0cf">I</span> <span style="color: #3cd0cf">had</span> <span style="color: #3cd0cf">a</span>
+    <span style="color: #3cd0cf">poster</span> of you <span style="color: #3cd0cf">on</span> <span
+            style="color: #3cd0cf">my</span> <span style="color: #3cd0cf">wall</span> when I was <span
+            style="color: #3cd0cf">younger.</span> I remember the <span style="color: #3cd0cf">poster!</span> My hair
+    was amazing</p>
+<P id="testP">测试测试测试</P>
+<input type="button" value="获取所有文本" onclick="Time()" style="margin: 10px">
+<div id="div" style="width: 100px;height: 100px;background-color: red;position: absolute;opacity:1"></div>
+<div id="div2" style="left:110px;width: 100px;height: 100px;background-color: red;position: absolute"></div>
+<div id="div3" style="clear: both;margin-top: 200px"></div>
+
+
+<script>
+    document.getElementById("div3").innerHTML = getDetailHtml(1);
+</script>
+</body>
+</html>
